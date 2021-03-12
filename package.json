@@ -1,26 +1,32 @@
 {
-  "name": "today-topic-backend",
-  "version": "1.0.0",
-  "repository": "git@github.com:YunYeongChang/today-topic-backend.git",
-  "author": "YeongChang Yun <45313479+YunYeongChang@users.noreply.github.com>",
-  "license": "MIT",
-  "scripts": {
-    "start": "nodemon --exec yarn ts-node src/index.ts"
-  },
-  "devDependencies": {
-    "eslint": "^7.21.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "nodemon": "^2.0.7",
-    "npx": "^10.2.2",
-    "parcel-bundler": "^1.12.4",
-    "prettier": "^2.2.1",
-    "ts-node": "^9.1.1"
-  },
-  "dependencies": {
-    "@types/express": "^4.17.11",
-    "@typescript-eslint/eslint-plugin": "^4.17.0",
-    "@typescript-eslint/parser": "^4.17.0",
-    "typescript": "^4.2.3"
-  }
+    "name": "today-topic-backend",
+    "version": "1.0.0",
+    "repository": "git@github.com:YunYeongChang/today-topic-backend.git",
+    "author": "YeongChang Yun <45313479+YunYeongChang@users.noreply.github.com>",
+    "license": "MIT",
+    "scripts": {
+        "dev": "nodemon --exec yarn ts-node src/index.ts",
+        "start": "node build/server/serve.js",
+        "build": "tsc --build",
+        "clean": "tsc --build --clean"
+    },
+    "devDependencies": {
+        "eslint": "^7.21.0",
+        "eslint-config-prettier": "^8.1.0",
+        "eslint-plugin-prettier": "^3.3.1",
+        "nodemon": "^2.0.7",
+        "npx": "^10.2.2",
+        "parcel-bundler": "^1.12.4",
+        "prettier": "^2.2.1",
+        "ts-node": "^9.1.1"
+    },
+    "dependencies": {
+        "@types/express": "^4.17.11",
+        "@typescript-eslint/eslint-plugin": "^4.17.0",
+        "@typescript-eslint/parser": "^4.17.0",
+        "typescript": "^4.2.3"
+    },
+    "engines": {
+        "node": "14.10.1"
+    }
 }
