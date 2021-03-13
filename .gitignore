@@ -1,5 +1,7 @@
 /yarn-error.log
+env/.env
 node_modules
 build
 .idea
 .vscode
+.run
