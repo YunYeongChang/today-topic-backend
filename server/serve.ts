@@ -19,7 +19,7 @@ const onError = (error: { syscall: string; code: any }) => {
 };
 
 const onListening = () => {
-  console.log(`Secured API Server is Running on ${port}`);
+  console.log(`\n\nSecured API Server is Running on ${port}`);
 };
 
 server.listen(port);

@@ -57,7 +57,7 @@ connection.on(
   'disconnected',
   async (): Promise<void> => {
     console.log(
-      `[DB] Database disconnected. Trying to reconnect... (${DBAttempt++})`
+      `\n[DB] Database disconnected. Trying to reconnect... (${DBAttempt++})`
     );
     DBError = 'disconnected';
     await delay(1000);
