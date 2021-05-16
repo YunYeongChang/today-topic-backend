@@ -10,6 +10,7 @@ import { json, urlencoded } from 'express';
 import { connect, connection } from 'mongoose';
 
 import router from '../src/index';
+import clickService from '../src/clickService';
 
 const app = express();
 let DBError: string | null,
@@ -27,6 +28,7 @@ app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', router);
+app.use('/', clickService.clickRouter);
 app.engine('html', express_ejs.renderFile);
 
 const delay = (ms: number) => {
@@ -57,7 +59,7 @@ connection.on(
   'disconnected',
   async (): Promise<void> => {
     console.log(
-      `[DB] Database disconnected. Trying to reconnect... (${DBAttempt++})`
+      `\n[DB] Database disconnected. Trying to reconnect... (${DBAttempt++})`
     );
     DBError = 'disconnected';
     await delay(1000);

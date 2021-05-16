@@ -1,45 +1,49 @@
 {
-    "name": "today-topic-backend",
-    "version": "1.0.0",
-    "repository": "git@github.com:YunYeongChang/today-topic-backend.git",
-    "author": "YeongChang Yun <45313479+YunYeongChang@users.noreply.github.com>",
-    "license": "MIT",
-    "scripts": {
-        "dev": "nodemon -e js,json,yaml,html,env --exec yarn ts-node server/serve.ts",
-        "start": "node build/server/serve.js",
-        "build": "yarn clean && tsc --build",
-        "clean": "tsc --build --clean"
-    },
-    "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^4.17.0",
-        "@typescript-eslint/parser": "^4.17.0",
-        "eslint": "^7.21.0",
-        "eslint-config-prettier": "^8.1.0",
-        "eslint-plugin-prettier": "^3.3.1",
-        "nodemon": "^2.0.7",
-        "prettier": "^2.2.1",
-        "ts-node": "^9.1.1"
-    },
-    "dependencies": {
-        "@types/cookie-parser": "^1.4.2",
-        "@types/cors": "^2.8.10",
-        "@types/ejs": "^3.0.6",
-        "@types/express": "^4.17.11",
-        "@types/mongoose": "^5.10.3",
-        "@types/node": "^14.14.34",
-        "cookie-parser": "^1.4.5",
-        "cors": "^2.8.5",
-        "dotenv": "^8.2.0",
-        "ejs": "^3.1.6",
-        "express": "^4.17.1",
-        "fs": "^0.0.1-security",
-        "http": "^0.0.1-security",
-        "jsonwebtoken": "^8.5.1",
-        "mongoose": "^5.12.0",
-        "source-map-support": "^0.5.19",
-        "typescript": "^4.2.3"
-    },
-    "engines": {
-        "node": "14.10.1"
-    }
+  "name": "today-topic-backend",
+  "version": "1.0.0",
+  "repository": "git@github.com:YunYeongChang/today-topic-backend.git",
+  "author": "YeongChang Yun <45313479+YunYeongChang@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon -e ts,js,json,yaml,html,env --exec yarn ts-node server/serve.ts",
+    "start": "node build/server/serve.js",
+    "build": "yarn clean && tsc --build",
+    "clean": "tsc --build --clean"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "ts-node": "^9.1.1"
+  },
+  "dependencies": {
+    "@types/cookie-parser": "^1.4.2",
+    "@types/cors": "^2.8.10",
+    "@types/ejs": "^3.0.6",
+    "@types/express": "^4.17.11",
+    "@types/mongoose": "^5.10.3",
+    "@types/node": "^14.14.34",
+    "@types/node-cron": "^2.0.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.0",
+    "node-cron": "^3.0.0",
+    "source-map-support": "^0.5.19",
+    "typescript": "^4.2.3"
+  },
+  "engines": {
+    "node": "16.0.0"
+  }
 }
