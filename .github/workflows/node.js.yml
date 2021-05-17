@@ -1,0 +1,32 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: [self-hosted, linux, X64]
+
+    strategy:
+      matrix:
+        node-version: [16.0.0]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn install
+      - run: yarn build
+      - run: echo "console.log('Launch Server Prepared');" > temp.js
+      - run: sudo pm2 start temp.js # add temp task for delete all process
+      - run: sudo pm2 delete all
+      - run: mkdir build/env && sudo cp /var/todaytopic/certificates/.env build/env/.env
+      - run: sudo pm2 start build/server/serve.js -o /var/todaytopic/frontend/develop/out.txt -e /var/todaytopic/frontend/develop/error.txt # launch main process
+      - run: sudo chown -R www-data:www-data /var/todaytopic/frontend/develop
