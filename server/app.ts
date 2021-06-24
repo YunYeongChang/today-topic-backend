@@ -1,5 +1,5 @@
 import * as path from 'path';
-import * as express_ejs from 'ejs';
+import { renderFile } from 'ejs';
 
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -14,7 +14,7 @@ import clickService from '../src/clickService';
 
 const app = express();
 let DBError: string | null,
-  DBAttempt: number = 0;
+  DBAttempt = 0;
 
 //OPEN LOCAL ENV FILE WHEN NOT RUNNING IN CI/CD
 if (!process.env.RUN_IN_CI_CD) {
@@ -29,43 +29,43 @@ app.use(cookieParser());
 
 app.use('/', router);
 app.use('/', clickService.clickRouter);
-app.engine('html', express_ejs.renderFile);
+app.engine('html', (path) => {
+  void renderFile(path);
+});
 
-const delay = (ms: number) => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+const connectInfo = {
+  id: process.env.DB_USER_ID || '',
+  pw: process.env.DB_USER_PW || '',
+  host: process.env.DB_HOST || '',
+  port: process.env.DB_PORT || '',
+  name: process.env.DB_NAME || '',
+  auth: process.env.DB_AUTH_USER_DB || '',
 };
-
 //#DATABASE CONNECT FUNCTION
 const DBConnect = (): void => {
   connect(
-    `mongodb://${process.env.DB_USER_ID}:${process.env.DB_USER_PW}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?authSource=${process.env.DB_AUTH_USER_DB}`,
+    `mongodb://${connectInfo.id}:${connectInfo.pw}@${connectInfo.host}:${connectInfo.port}/${connectInfo.name}?authSource=${connectInfo.auth}`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-    }
+    },
   )
     .then(() => {
       DBAttempt = 0;
       DBError = null;
-      console.log(`[DB] Database connected on port ${process.env.DB_PORT}`);
+      console.log(`[DB] Database connected on port ${connectInfo.port}`);
     })
-    .catch((err) => {
-      DBError = err.toString();
+    .catch((reason: any) => {
+      DBError = String(reason);
       console.log(DBError);
     });
 };
 
-connection.on(
-  'disconnected',
-  async (): Promise<void> => {
-    console.log(
-      `\n[DB] Database disconnected. Trying to reconnect... (${DBAttempt++})`
-    );
-    DBError = 'disconnected';
-    await delay(1000);
-    DBConnect();
-  }
-);
+connection.on('disconnected', () => {
+  console.log(`\n[DB] Database disconnected. Trying to reconnect... (${DBAttempt++})`);
+  DBError = 'disconnected';
+  setTimeout(DBConnect, 1000);
+});
 
 DBConnect();
-export { app, DBError, delay };
+export { app, DBError };

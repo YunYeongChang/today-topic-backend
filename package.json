@@ -39,6 +39,7 @@
     "moment": "^2.29.1",
     "mongoose": "^5.12.0",
     "node-cron": "^3.0.0",
+    "python-shell": "^3.0.0",
     "source-map-support": "^0.5.19"
   },
   "engines": {
